@@ -1,0 +1,1 @@
+Synthetic Multi-Echelon Supply Chain Planning Dataset (exact regeneration, seed=42)
