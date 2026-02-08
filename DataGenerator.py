@@ -3,7 +3,7 @@ Synthetic Multi-Echelon Supply Chain Planning Dataset Generator
 Exact regeneration version (seed = 42)
 
 Run:
-    python generate_dataset.py --output_dir ./data --weeks 156 --start_date=2023-01-02 --seed 42
+    python DataGenerator.py --output_dir ./data --weeks 156 --start_date=2025-01-02 --seed 42
 """
 
 import argparse
@@ -18,11 +18,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output_dir", type=str, required=True)
     parser.add_argument("--weeks", type=int, default=156)
-    parser.add_argument("--start_date", type=str, default="2023-01-02")
+    parser.add_argument("--start_date", type=str, default="2025-01-02")
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
 
-    os.makedirs(args.out_dir, exist_ok=True)
+    os.makedirs(args.output_dir, exist_ok=True)
 
     # ------------------
     # FIXED CONFIG
@@ -30,7 +30,7 @@ def main():
     random.seed(args.seed)
     np.random.seed(args.seed)
 
-    products = ["P1", "P2", "P3", "P4", "P5"]
+    products = ["Product1", "Product2", "Product3", "Product4", "Product5"]
     regions = ["West", "Central", "East"]
     dcs = ["DC_W", "DC_C", "DC_E"]
     region_to_dc = {"West": "DC_W", "Central": "DC_C", "East": "DC_E"}
@@ -52,7 +52,7 @@ def main():
         "trend_per_week": np.random.uniform(-0.25, 0.45, size=len(products)),
         "promo_sensitivity": np.random.uniform(0.10, 0.35, size=len(products)),
     })
-    products_df.to_csv(f"{args.out_dir}/products.csv", index=False)
+    products_df.to_csv(f"{args.output_dir}/products.csv", index=False)
 
     # ------------------
     # COSTS
@@ -66,7 +66,7 @@ def main():
             np.random.uniform(8.0, 22.0, size=len(products)), 2
         ),
     })
-    costs_df.to_csv(f"{args.out_dir}/costs.csv", index=False)
+    costs_df.to_csv(f"{args.output_dir}/costs.csv", index=False)
 
     # ------------------
     # PROMOTIONS
@@ -81,7 +81,7 @@ def main():
                 "promo_intensity": int(random.random() < 0.10),
             })
     promotions_df = pd.DataFrame(promo_rows)
-    promotions_df.to_csv(f"{args.out_dir}/promotions.csv", index=False)
+    promotions_df.to_csv(f"{args.output_dir}/promotions.csv", index=False)
 
     # ------------------
     # DEMAND GENERATION
@@ -90,6 +90,7 @@ def main():
     region_share = np.array([0.38, 0.30, 0.32])
 
     for w, d in enumerate(week_dates):
+        '''Seasonality: yearly pattern with 52-week period'''
         seasonal = math.sin(2 * math.pi * (w % 52) / 52.0)
 
         for p in products:
@@ -120,7 +121,7 @@ def main():
                 })
 
     demand_df = pd.DataFrame(demand_rows)
-    demand_df.to_csv(f"{args.out_dir}/demand.csv", index=False)
+    demand_df.to_csv(f"{args.output_dir}/demand.csv", index=False)
 
     # ------------------
     # INVENTORY STATE (DC LEVEL)
@@ -141,7 +142,7 @@ def main():
 
     inventory_state_df = pd.DataFrame(state_rows)
     inventory_state_df.to_csv(
-        f"{args.out_dir}/inventory_state.csv", index=False
+        f"{args.output_dir}/inventory_state.csv", index=False
     )
 
     # ------------------
@@ -162,7 +163,7 @@ def main():
                 })
 
     actions_df = pd.DataFrame(action_rows)
-    actions_df.to_csv(f"{args.out_dir}/actions.csv", index=False)
+    actions_df.to_csv(f"{args.output_dir}/actions.csv", index=False)
 
     # ------------------
     # REWARDS
@@ -194,19 +195,19 @@ def main():
                 })
 
     rewards_df = pd.DataFrame(reward_rows)
-    rewards_df.to_csv(f"{args.out_dir}/rewards.csv", index=False)
+    rewards_df.to_csv(f"{args.output_dir}/rewards.csv", index=False)
 
     # ------------------
     # README MARKER
     # ------------------
-    with open(f"{args.out_dir}/README.txt", "w") as f:
+    with open(f"{args.output_dir}/README.txt", "w") as f:
         f.write(
             "Synthetic Multi-Echelon Supply Chain Planning Dataset\n"
             f"Generated with seed={args.seed}\n"
         )
 
     print("Dataset generation complete.")
-    print("Output directory:", args.out_dir)
+    print("Output directory:", args.output_dir)
 
 
 if __name__ == "__main__":
