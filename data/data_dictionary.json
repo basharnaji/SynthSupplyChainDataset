@@ -1,0 +1,106 @@
+{
+  "products.csv": {
+    "product": "Product identifier (Product1..Product5).",
+    "uom": "Unit of measure.",
+    "base_demand": "Baseline weekly demand level used by demand generator.",
+    "season_amp": "Seasonality amplitude (fraction of base demand).",
+    "trend_per_week": "Linear trend applied per week.",
+    "promo_sensitivity": "Multiplicative lift factor applied during promos."
+  },
+  "costs.csv": {
+    "product": "Product identifier.",
+    "holding_cost_per_unit_week": "Holding cost per unit per week at DCs.",
+    "stockout_cost_per_unit": "Penalty per unit of unmet demand/backlog at DCs.",
+    "production_cost_per_unit": "Unit production cost (not used in reward by default).",
+    "transport_cost_per_unit": "Unit transport cost (not used in reward by default)."
+  },
+  "sourcing.csv": {
+    "product": "Product identifier.",
+    "primary_supplier": "Primary supplier assigned to the product.",
+    "secondary_supplier": "Secondary supplier assigned to the product."
+  },
+  "routing.csv": {
+    "product": "Product identifier.",
+    "primary_factory": "Primary factory assigned to the product.",
+    "secondary_factory": "Secondary factory assigned to the product."
+  },
+  "lead_times.csv": {
+    "origin": "Origin node (supplier/factory/DC).",
+    "destination": "Destination node (factory/DC/region).",
+    "product": "Product identifier.",
+    "base_lead_time_weeks": "Base lead time in weeks (used in shipments_planned; sim uses stochastic variation around this)."
+  },
+  "promotions.csv": {
+    "week": "0-based week index.",
+    "week_start": "ISO date for week start (Monday).",
+    "product": "Product identifier.",
+    "promo_intensity": "0=no promo, 1=promo, 2=strong promo."
+  },
+  "demand.csv": {
+    "week": "0-based week index.",
+    "week_start": "ISO date for week start (Monday).",
+    "region": "Customer region (West/Central/East).",
+    "product": "Product identifier.",
+    "demand": "Realized demand units in that week/region/product."
+  },
+  "capacity.csv": {
+    "week": "0-based week index.",
+    "week_start": "ISO date for week start (Monday).",
+    "site": "Factory site (F1/F2).",
+    "product": "Product identifier.",
+    "capacity": "Effective production capacity (units/week) available for that product at that site."
+  },
+  "policy_targets.csv": {
+    "dc": "Distribution center (DC_W/DC_C/DC_E).",
+    "product": "Product identifier.",
+    "mean_weekly_demand": "Average weekly demand into the DC (aggregated across its regions).",
+    "lt": "Average base lead time (factory->DC) used in target calculation.",
+    "safety_weeks": "Extra weeks of safety stock coverage.",
+    "base_stock_target": "Target inventory position for base-stock policy."
+  },
+  "initial_inventory.csv": {
+    "location": "Factory or DC.",
+    "product": "Product identifier.",
+    "initial_on_hand": "Starting on-hand inventory before week 0 simulation."
+  },
+  "actions.csv": {
+    "week": "0-based week index.",
+    "week_start": "ISO date for week start (Monday).",
+    "action_type": "replenishment_order (factory->DC) or production (within factory).",
+    "origin": "Origin node (factory).",
+    "destination": "Destination node (DC for orders; factory for production).",
+    "product": "Product identifier.",
+    "qty": "Action quantity (units)."
+  },
+  "inventory_state.csv": {
+    "week": "0-based week index.",
+    "week_start": "ISO date for week start (Monday).",
+    "location": "Factory or DC.",
+    "product": "Product identifier.",
+    "on_hand": "End-of-week on-hand inventory at location.",
+    "in_transit": "Pipeline inventory destined to this location (all open shipments).",
+    "backlog": "Unmet demand backlog (DC only).",
+    "arrivals": "Units received/arrived at this location in the current week."
+  },
+  "rewards.csv": {
+    "week": "0-based week index.",
+    "week_start": "ISO date for week start (Monday).",
+    "location": "DC (DC_W/DC_C/DC_E).",
+    "product": "Product identifier.",
+    "holding_cost": "Holding cost incurred at the DC this week.",
+    "stockout_cost": "Stockout/backlog penalty this week.",
+    "reward": "Reward = -(holding_cost + stockout_cost).",
+    "served_units": "Units actually shipped/served to customers from the DC this week.",
+    "unmet_units": "Units unmet this week (added to backlog)."
+  },
+  "shipments_planned.csv": {
+    "ship_week": "Week index when the order was placed/shipped (same as decision week).",
+    "arrival_week": "Planned arrival week using BASE lead time.",
+    "origin": "Factory origin.",
+    "destination": "DC destination.",
+    "product": "Product identifier.",
+    "qty": "Order quantity.",
+    "base_lead_time_weeks": "Base lead time used to compute arrival_week.",
+    "ship_week_start": "ISO date for ship_week start (Monday)."
+  }
+}

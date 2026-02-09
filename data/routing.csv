@@ -1,0 +1,6 @@
+product,primary_factory,secondary_factory
+Product1,Factory1,Factory2
+Product2,Factory1,Factory2
+Product3,Factory1,Factory2
+Product4,Factory2,Factory1
+Product5,Factory1,Factory2

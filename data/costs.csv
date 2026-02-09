@@ -1,6 +1,6 @@
-product,holding_cost_per_unit_week,stockout_cost_per_unit
-Product1,0.11,11.26
-Product2,0.336,9.27
-Product3,0.28,16.66
-Product4,0.121,13.35
-Product5,0.538,21.77
+product,holding_cost_per_unit_week,stockout_cost_per_unit,production_cost_per_unit,transport_cost_per_unit
+Product1,0.11,11.26,4.33,1.15
+Product2,0.336,9.27,6.3,0.81
+Product3,0.28,16.66,5.4,0.65
+Product4,0.121,13.35,4.25,0.31
+Product5,0.538,21.77,2.07,0.51

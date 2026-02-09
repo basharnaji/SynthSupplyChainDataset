@@ -1,0 +1,6 @@
+product,primary_supplier,secondary_supplier
+Product1,Supplier1,Supplier2
+Product2,Supplier1,Supplier2
+Product3,Supplier2,Supplier1
+Product4,Supplier1,Supplier2
+Product5,Supplier1,Supplier2
